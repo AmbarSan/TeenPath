@@ -6,27 +6,30 @@
 //
 
 import SwiftUI
-import SwiftData
 
 @main
-struct TeenpathApp: App {
-    var sharedModelContainer: ModelContainer = {
-        let schema = Schema([
-            Item.self,
-        ])
-        let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
+struct TeenPathApp: App {
 
-        do {
-            return try ModelContainer(for: schema, configurations: [modelConfiguration])
-        } catch {
-            fatalError("Could not create ModelContainer: \(error)")
-        }
-    }()
+    @State private var isShowingSplash = true
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ZStack {
+                ContentView()
+
+                if isShowingSplash {
+                    SplashScreenView()
+                        .transition(.opacity)
+                        .zIndex(1)
+                }
+            }
+            .task {
+                try? await Task.sleep(for: .seconds(3))
+
+                withAnimation(.easeInOut(duration: 0.45)) {
+                    isShowingSplash = false
+                }
+            }
         }
-        .modelContainer(sharedModelContainer)
     }
 }
