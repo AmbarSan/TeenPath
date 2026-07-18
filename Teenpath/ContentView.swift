@@ -80,7 +80,7 @@ struct ContentView: View {
             description: """
             I am developing TeenPath, a platform designed to help young people discover international opportunities, share their projects, and connect with others who have similar interests.
             """,
-            category: "Tech",
+            category: "Technology",
             location: "Mexico",
             date: "1 hour ago",
             imageName: nil,
