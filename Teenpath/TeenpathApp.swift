@@ -9,15 +9,14 @@ import SwiftUI
 
 @main
 struct TeenPathApp: App {
-
-    @State private var isShowingSplash = true
+    @State private var showSplash = true
 
     var body: some Scene {
         WindowGroup {
             ZStack {
                 ContentView()
 
-                if isShowingSplash {
+                if showSplash {
                     SplashScreenView()
                         .transition(.opacity)
                         .zIndex(1)
@@ -27,7 +26,7 @@ struct TeenPathApp: App {
                 try? await Task.sleep(for: .seconds(3))
 
                 withAnimation(.easeInOut(duration: 0.45)) {
-                    isShowingSplash = false
+                    showSplash = false
                 }
             }
         }
